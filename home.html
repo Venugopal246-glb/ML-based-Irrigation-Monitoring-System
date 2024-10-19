@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/1334312/pexels-photo-1334312.jpeg?cs=srgb&dl=pexels-designstrive-1334312.jpg&fm=jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        .input-box {
+            background-color: rgba(211, 211, 211, 0.5);
+            border-radius: 3px;
+            padding: 5px;
+            width: 100px;
+            text-align: center;
+        }
+        .icon-box {
+            border: 3px solid black;
+            padding: 20px;
+            text-align: center;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .icon-box p {
+            margin-top: 10px;
+        }
+        /* Darker placeholder styling */
+        ::placeholder {
+            color: #333; /* Dark gray */
+            font-weight: bold;
+        }
+        /* Dropdown menu styling */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen">
+    <!-- Bar Menu Icon -->
+    <div class="absolute top-4 left-4">
+        <i class="fas fa-bars text-2xl cursor-pointer" onclick="toggleMenu()"></i>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <div id="dropdownMenu" class="dropdown-menu">
+        <a href="#">About</a>
+        <a href="#">Customer Care</a>
+        <a href="#">Phno: 7892636365</a>
+        <a href="mailto:venugopals.22.beai@acharya.ac.in">MailId: venugopals.22.beai@acharya.ac.in</a>
+    </div>
+
+    <div class="absolute top-4 right-4 flex space-x-4">
+        <i class="fab fa-facebook-f text-2xl cursor-pointer" onclick="openFacebook()"></i>
+        <i class="fab fa-linkedin-in text-2xl cursor-pointer" onclick="openLinkedIn()"></i>
+    </div>
+    <div class="text-center mb-8">
+        <span class="text-xl font-bold">Location :</span>
+        <input type="text" placeholder="type your location.." class="border-b-2 border-black bg-transparent focus:outline-none ml-2">
+    </div>
+    <div class="grid grid-cols-3 gap-8 mb-8">
+        <div class="icon-box">
+            <span class="text-5xl font-bold">N</span>
+            <p>Nitrogen</p>
+        </div>
+        <div class="icon-box">
+            <span class="text-5xl font-bold">P</span>
+            <p>Phosphorus</p>
+        </div>
+        <div class="icon-box">
+            <span class="text-5xl font-bold">K</span>
+            <p>Potassium</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-3 gap-8 mb-8">
+        <input type="number" id="N" placeholder="type value.." class="input-box">
+        <input type="number" id="P" placeholder="type value.." class="input-box">
+        <input type="number" id="K" placeholder="type value.." class="input-box">
+    </div>
+    <div class="grid grid-cols-3 gap-8 mb-8">
+        <div class="icon-box">
+            <span class="text-5xl font-bold">°C</span>
+            <p>Temperature</p>
+        </div>
+        <div class="icon-box">
+            <span class="text-5xl font-bold">pH</span>
+            <p>pH Level</p>
+        </div>
+        <div class="icon-box">
+            <span class="text-5xl font-bold">Crop</span>
+        </div>
+    </div>
+    <div class="grid grid-cols-3 gap-8">
+        <input type="number" id="temperature" placeholder="type value.." class="input-box">
+        <input type="number" id="pH" placeholder="type value.." class="input-box">
+        <input type="number" id="crop" placeholder="type value.." class="input-box">
+    </div>
+    <div class="absolute bottom-8 right-8 flex flex-col space-y-4">
+        <div class="text-white text-center">
+            <p>Soil Moisture</p>
+            <input type="text" id="soilMoisture" class="input-box" readonly>
+        </div>
+    </div>
+
+    <!-- Calculate Button -->
+    <div class="mt-12">
+        <button onclick="calculateSoilMoisture()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Calculate Soil Moisture
+        </button>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('dropdownMenu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        }
+
+        function openFacebook() {
+            // Open Facebook profile
+            window.open('https://www.facebook.com/VenugopalWagangeri', '_blank');
+        }
+
+        function openLinkedIn() {
+            // Open LinkedIn profile
+            window.open('https://www.linkedin.com/in/venugopal-wagangeri-689941285?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app');
+        }
+
+        function calculateSoilMoisture() {
+            // Set soil moisture to a fixed value
+            const soilMoisture = 33.4745465;
+
+            // Display result
+            document.getElementById('soilMoisture').value = soilMoisture.toFixed(7);
+        }
+    </script>
+</body>
+</html>
